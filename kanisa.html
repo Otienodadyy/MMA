@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mombasa Main Altar - Registration Desk</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4a6f28;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4a6f28;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #3a5a20;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4a6f28;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .progress-container {
+            text-align: center;
+            margin: 50px auto;
+            max-width: 400px;
+        }
+        .progress-circle {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        .progress-circle svg {
+            width: 100%;
+            height: 100%;
+        }
+        .progress-circle circle {
+            fill: none;
+            stroke: #e0e0e0;
+            stroke-width: 10;
+        }
+        .progress-circle circle.progress {
+            stroke: #4a6f28;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            animation: progress 2s ease-out forwards;
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a6f28;
+        }
+        @keyframes progress {
+            from {
+                stroke-dashoffset: 440;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        .hidden {
+            display: none;
+        }
+        .attendance-form {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Login Form -->
+    <div id="login-page" class="container">
+        <div class="header">
+            <h1>Mombasa Main Altar</h1>
+            <h2>Registration Desk Management System</h2>
+        </div>
+        <div class="form-container">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Page 2: Progress Bar -->
+    <div id="progress-page" class="container hidden">
+        <div class="header">
+            <h1>Mombasa Main Altar</h1>
+            <h2>Loading System...</h2>
+        </div>
+        <div class="progress-container">
+            <div class="progress-circle">
+                <svg viewBox="0 0 160 160">
+                    <circle cx="80" cy="80" r="70"></circle>
+                    <circle class="progress" cx="80" cy="80" r="70"></circle>
+                </svg>
+                <div class="progress-text">100%</div>
+            </div>
+            <p>Initializing registration system...</p>
+        </div>
+    </div>
+
+    <!-- Page 3: Registration Form -->
+    <div id="registration-page" class="container hidden">
+        <div class="header">
+            <h1>Mombasa Main Altar</h1>
+            <h2>Member Registration</h2>
+        </div>
+        <div class="form-container">
+            <form id="member-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="id-number">ID Number</label>
+                    <input type="text" id="id-number" required>
+                </div>
+                <div class="form-group">
+                    <label for="region">Region</label>
+                    <select id="region" required>
+                        <option value="">Select Region</option>
+                        <option value="south">South</option>
+                        <option value="central">Central</option>
+                        <option value="west">West</option>
+                        <option value="north">North</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cluster">Cluster</label>
+                    <select id="cluster" required>
+                        <option value="">Select Cluster</option>
+                        <!-- Clusters will be populated based on region selection -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="service-point">Point of Service</label>
+                    <select id="service-point" required>
+                        <option value="">Select Point of Service</option>
+                        <option value="worship">Worship Team</option>
+                        <option value="ushering">Ushering Team</option>
+                        <option value="media">Media Team</option>
+                        <option value="prayer">Prayer Team</option>
+                        <option value="children">Children Ministry</option>
+                        <option value="youth">Youth Ministry</option>
+                        <option value="sanctuary">Sanctuary Keepers</option>
+                        <option value="none">Not Serving</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-date">Registration Date</label>
+                    <input type="date" id="reg-date" required>
+                </div>
+                <button type="submit">Register Member</button>
+                <button type="button" id="view-members-btn">View All Members</button>
+                <button type="button" id="record-attendance-btn">Record Attendance</button>
+            </form>
+
+            <div id="attendance-form" class="attendance-form hidden">
+                <h3>Record Attendance</h3>
+                <form id="attendance-record-form">
+                    <div class="form-group">
+                        <label for="attendance-member">Member</label>
+                        <select id="attendance-member" required>
+                            <option value="">Select Member</option>
+                            <!-- Members will be populated from database -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance-date">Date</label>
+                        <input type="date" id="attendance-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time-in">Time In</label>
+                        <input type="time" id="time-in" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-type">Service Type</label>
+                        <select id="service-type" required>
+                            <option value="sunday">Sunday Service</option>
+                            <option value="midweek">Midweek Service</option>
+                            <option value="prayer">Prayer Meeting</option>
+                            <option value="special">Special Event</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance-notes">Notes</label>
+                        <input type="text" id="attendance-notes">
+                    </div>
+                    <button type="submit">Save Attendance</button>
+                    <button type="button" id="cancel-attendance-btn" class="btn-secondary">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: Members List -->
+    <div id="members-page" class="container hidden">
+        <div class="header">
+            <h1>Mombasa Main Altar</h1>
+            <h2>Registered Members</h2>
+        </div>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="search-member">Search Member</label>
+                <input type="text" id="search-member" placeholder="Search by name, phone or ID">
+            </div>
+            <table id="members-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>ID Number</th>
+                        <th>Region</th>
+                        <th>Cluster</th>
+                        <th>Service Point</th>
+                        <th>Age</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Members will be populated here -->
+                </tbody>
+            </table>
+            <button type="button" id="back-to-registration-btn" class="btn-secondary">Back to Registration</button>
+        </div>
+    </div>
+
+    <!-- Page 5: Attendance Records -->
+    <div id="attendance-page" class="container hidden">
+        <div class="header">
+            <h1>Mombasa Main Altar</h1>
+            <h2>Attendance Records</h2>
+        </div>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="filter-attendance">Filter Records</label>
+                <select id="filter-attendance">
+                    <option value="all">All Records</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="sunday">Sunday Services</option>
+                    <option value="midweek">Midweek Services</option>
+                </select>
+            </div>
+            <table id="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Member</th>
+                        <th>Date</th>
+                        <th>Time In</th>
+                        <th>Service Type</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Attendance records will be populated here -->
+                </tbody>
+            </table>
+            <button type="button" id="back-to-registration-from-attendance" class="btn-secondary">Back to Registration</button>
+        </div>
+    </div>
+
+    <script>
+        // Database simulation
+        let users = [
+            { username: 'admin', password: 'admin123', role: 'admin' },
+            { username: 'clerk', password: 'clerk123', role: 'clerk' },
+            { username: 'usher', password: 'usher123', role: 'usher' }
+        ];
+
+        let members = [];
+        let attendanceRecords = [];
+
+        // Cluster data by region
+        const clustersByRegion = {
+            south: ['Cluster 1', 'Cluster 2', 'Cluster 3'],
+            central: ['Cluster A', 'Cluster B', 'Cluster C', 'Cluster D'],
+            west: ['West 1', 'West 2', 'West 3', 'West 4', 'West 5'],
+            north: ['North Alpha', 'North Beta', 'North Gamma']
+        };
+
+        // DOM elements
+        const loginPage = document.getElementById('login-page');
+        const progressPage = document.getElementById('progress-page');
+        const registrationPage = document.getElementById('registration-page');
+        const membersPage = document.getElementById('members-page');
+        const attendancePage = document.getElementById('attendance-page');
+        
+        const loginForm = document.getElementById('login-form');
+        const memberForm = document.getElementById('member-form');
+        const attendanceForm = document.getElementById('attendance-form');
+        const attendanceRecordForm = document.getElementById('attendance-record-form');
+        
+        const viewMembersBtn = document.getElementById('view-members-btn');
+        const recordAttendanceBtn = document.getElementById('record-attendance-btn');
+        const cancelAttendanceBtn = document.getElementById('cancel-attendance-btn');
+        const backToRegistrationBtn = document.getElementById('back-to-registration-btn');
+        const backToRegistrationFromAttendanceBtn = document.getElementById('back-to-registration-from-attendance');
+        
+        const regionSelect = document.getElementById('region');
+        const clusterSelect = document.getElementById('cluster');
+        const attendanceMemberSelect = document.getElementById('attendance-member');
+        const membersTable = document.getElementById('members-table').getElementsByTagName('tbody')[0];
+        const searchMemberInput = document.getElementById('search-member');
+        const attendanceTable = document.getElementById('attendance-table').getElementsByTagName('tbody')[0];
+        const filterAttendanceSelect = document.getElementById('filter-attendance');
+
+        // Event listeners
+        loginForm.addEventListener('submit', handleLogin);
+        memberForm.addEventListener('submit', handleMemberRegistration);
+        viewMembersBtn.addEventListener('click', showMembersPage);
+        recordAttendanceBtn.addEventListener('click', showAttendanceForm);
+        cancelAttendanceBtn.addEventListener('click', hideAttendanceForm);
+        attendanceRecordForm.addEventListener('submit', handleAttendanceRecording);
+        backToRegistrationBtn.addEventListener('click', showRegistrationPage);
+        backToRegistrationFromAttendanceBtn.addEventListener('click', showRegistrationPage);
+        regionSelect.addEventListener('change', updateClusters);
+        searchMemberInput.addEventListener('input', filterMembers);
+        filterAttendanceSelect.addEventListener('change', filterAttendanceRecords);
+
+        // Set today's date as default for registration date
+        document.getElementById('reg-date').valueAsDate = new Date();
+        document.getElementById('attendance-date').valueAsDate = new Date();
+
+        // Functions
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                loginPage.classList.add('hidden');
+                progressPage.classList.remove('hidden');
+                
+                // Simulate loading with progress bar
+                setTimeout(() => {
+                    progressPage.classList.add('hidden');
+                    registrationPage.classList.remove('hidden');
+                }, 2000);
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        function handleMemberRegistration(e) {
+            e.preventDefault();
+            
+            const member = {
+                id: Date.now().toString(),
+                name: document.getElementById('full-name').value,
+                phone: document.getElementById('phone').value,
+                idNumber: document.getElementById('id-number').value,
+                region: document.getElementById('region').value,
+                cluster: document.getElementById('cluster').value,
+                servicePoint: document.getElementById('service-point').value,
+                age: document.getElementById('age').value,
+                regDate: document.getElementById('reg-date').value
+            };
+            
+            members.push(member);
+            updateMembersDropdown();
+            
+            // Reset form
+            memberForm.reset();
+            document.getElementById('reg-date').valueAsDate = new Date();
+            
+            alert('Member registered successfully!');
+        }
+
+        function showMembersPage() {
+            registrationPage.classList.add('hidden');
+            membersPage.classList.remove('hidden');
+            renderMembersTable();
+        }
+
+        function showRegistrationPage() {
+            membersPage.classList.add('hidden');
+            attendancePage.classList.add('hidden');
+            registrationPage.classList.remove('hidden');
+            hideAttendanceForm();
+        }
+
+        function showAttendanceForm() {
+            attendanceForm.classList.remove('hidden');
+        }
+
+        function hideAttendanceForm() {
+            attendanceForm.classList.add('hidden');
+        }
+
+        function handleAttendanceRecording(e) {
+            e.preventDefault();
+            
+            const memberId = document.getElementById('attendance-member').value;
+            const member = members.find(m => m.id === memberId);
+            
+            if (!member) {
+                alert('Please select a valid member');
+                return;
+            }
+            
+            const record = {
+                id: Date.now().toString(),
+                memberId: memberId,
+                memberName: member.name,
+                date: document.getElementById('attendance-date').value,
+                timeIn: document.getElementById('time-in').value,
+                serviceType: document.getElementById('service-type').value,
+                notes: document.getElementById('attendance-notes').value
+            };
+            
+            attendanceRecords.push(record);
+            
+            // Reset form
+            attendanceRecordForm.reset();
+            document.getElementById('attendance-date').valueAsDate = new Date();
+            
+            hideAttendanceForm();
+            alert('Attendance recorded successfully!');
+        }
+
+        function updateClusters() {
+            const region = regionSelect.value;
+            clusterSelect.innerHTML = '<option value="">Select Cluster</option>';
+            
+            if (region && clustersByRegion[region]) {
+                clustersByRegion[region].forEach(cluster => {
+                    const option = document.createElement('option');
+                    option.value = cluster;
+                    option.textContent = cluster;
+                    clusterSelect.appendChild(option);
+                });
+            }
+        }
+
+        function renderMembersTable(filter = '') {
+            membersTable.innerHTML = '';
+            
+            const filteredMembers = filter 
+                ? members.filter(member => 
+                    member.name.toLowerCase().includes(filter.toLowerCase()) ||
+                    member.phone.includes(filter) ||
+                    member.idNumber.includes(filter))
+                : members;
+            
+            filteredMembers.forEach(member => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${member.name}</td>
+                    <td>${member.phone}</td>
+                    <td>${member.idNumber}</td>
+                    <td>${member.region.charAt(0).toUpperCase() + member.region.slice(1)}</td>
+                    <td>${member.cluster}</td>
+                    <td>${member.servicePoint.charAt(0).toUpperCase() + member.servicePoint.slice(1)}</td>
+                    <td>${member.age}</td>
+                    <td>
+                        <button class="btn-danger delete-member" data-id="${member.id}">Delete</button>
+                    </td>
+                `;
+                
+                membersTable.appendChild(row);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-member').forEach(button => {
+                button.addEventListener('click', function() {
+                    const memberId = this.getAttribute('data-id');
+                    deleteMember(memberId);
+                });
+            });
+        }
+
+        function updateMembersDropdown() {
+            attendanceMemberSelect.innerHTML = '<option value="">Select Member</option>';
+            
+            members.forEach(member => {
+                const option = document.createElement('option');
+                option.value = member.id;
+                option.textContent = `${member.name} (${member.phone})`;
+                attendanceMemberSelect.appendChild(option);
+            });
+        }
+
+        function deleteMember(memberId) {
+            if (confirm('Are you sure you want to delete this member?')) {
+                members = members.filter(member => member.id !== memberId);
+                renderMembersTable(searchMemberInput.value);
+                updateMembersDropdown();
+            }
+        }
+
+        function filterMembers() {
+            renderMembersTable(searchMemberInput.value);
+        }
+
+        function filterAttendanceRecords() {
+            const filter = filterAttendanceSelect.value;
+            const today = new Date().toISOString().split('T')[0];
+            const now = new Date();
+            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())).toISOString().split('T')[0];
+            const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+            
+            let filteredRecords = [...attendanceRecords];
+            
+            switch(filter) {
+                case 'today':
+                    filteredRecords = filteredRecords.filter(record => record.date === today);
+                    break;
+                case 'week':
+                    filteredRecords = filteredRecords.filter(record => record.date >= startOfWeek);
+                    break;
+                case 'month':
+                    filteredRecords = filteredRecords.filter(record => record.date >= startOfMonth);
+                    break;
+                case 'sunday':
+                    filteredRecords = filteredRecords.filter(record => record.serviceType === 'sunday');
+                    break;
+                case 'midweek':
+                    filteredRecords = filteredRecords.filter(record => record.serviceType === 'midweek');
+                    break;
+                // 'all' shows all records
+            }
+            
+            renderAttendanceTable(filteredRecords);
+        }
+
+        function renderAttendanceTable(records) {
+            attendanceTable.innerHTML = '';
+            
+            records.forEach(record => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${record.memberName}</td>
+                    <td>${record.date}</td>
+                    <td>${record.timeIn}</td>
+                    <td>${record.serviceType.charAt(0).toUpperCase() + record.serviceType.slice(1)}</td>
+                    <td>${record.notes || '-'}</td>
+                `;
+                
+                attendanceTable.appendChild(row);
+            });
+        }
+
+        // Initialize clusters dropdown
+        updateClusters();
+    </script>
+</body>
+</html>
